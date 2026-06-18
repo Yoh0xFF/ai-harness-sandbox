@@ -1,4 +1,5 @@
-# ai-harness-sandbox
+# AI Harness Sandbox
+
 Sandbox environment for the AI harness software
 
 ## Claude CLI Sandbox
