@@ -33,6 +33,7 @@ make create CODE_DIR=/path/to/your/code
 
 - `-v /path/to/your/code:/home/dev/code` mounts your project directory into the container
 - `-v ~/.claude-config-sandbox:/home/dev/.claude-config` persists Claude config and credentials on the host (the container sets `CLAUDE_CONFIG_DIR` to this path, keeping it separate from `~/.claude` where the CLI binary lives)
+- `--hostname` is set to `claude-cli-sandbox`, so the shell prompt shows `dev@claude-cli-sandbox:~$` instead of a random container ID
 
 ### Start / Stop / Remove
 

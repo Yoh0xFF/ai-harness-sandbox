@@ -14,6 +14,7 @@ build:
 create:
 	docker create -it \
 		--name $(CONTAINER_NAME) \
+		--hostname $(CONTAINER_NAME) \
 		-v $(CODE_DIR):/home/dev/code \
 		-v ~/.claude-config-sandbox:/home/dev/.claude-config \
 		$(IMAGE_NAME):latest
