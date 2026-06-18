@@ -19,7 +19,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && rm -rf /var/lib/apt/lists/*
 
 # Create non-root user with passwordless sudo
-RUN groupadd -g ${GID} ${USER} \
+RUN userdel -r $(getent passwd ${UID} | cut -d: -f1) 2>/dev/null; \
+  groupadd -f -g ${GID} ${USER} \
   && useradd -m -u ${UID} -g ${GID} -s /bin/bash ${USER} \
   && echo "${USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
