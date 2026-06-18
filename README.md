@@ -76,6 +76,8 @@ Remove the container (e.g. before recreating it with different volumes):
 make clean
 ```
 
+or
+
 ```bash
 docker rm claude-cli-sandbox
 ```
