@@ -62,9 +62,10 @@ RUN curl -fsSL https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz | tar -xz -C
 ENV PATH=${GOROOT}/bin:${GOPATH}/bin:${PATH}
 
 # Install Claude Code CLI (native, no Node dependency)
-RUN curl -fsSL https://cli.claude.ai/install.sh | sh
-ENV PATH=${HOME}/.claude/bin:${PATH}
+RUN curl -fsSL https://claude.ai/install.sh | bash
+ENV PATH=${HOME}/.local/bin:${PATH}
+ENV CLAUDE_CONFIG_DIR=${HOME}/.claude-config
 
 # Mount points for host volumes
 VOLUME ${HOME}/code
-VOLUME ${HOME}/.claude
+VOLUME ${HOME}/.claude-config

@@ -25,10 +25,10 @@ docker build -t claude-cli-sandbox -f claude-cli-sandbox.dockerfile \
 ```bash
 docker run -it \
   -v /path/to/your/code:/home/dev/code \
-  -v /path/to/.claude:/home/dev/.claude \
+  -v ~/.claude-yoh:/home/dev/.claude-config \
   claude-cli-sandbox
 ```
 
 - `-it` starts the container in interactive mode with a terminal attached
 - `-v /path/to/your/code:/home/dev/code` mounts your project directory into the container
-- `-v /path/to/.claude:/home/dev/.claude` mounts your Claude credentials for authentication
+- `-v ~/.claude-yoh:/home/dev/.claude-config` mounts your Claude config/credentials directory (the container sets `CLAUDE_CONFIG_DIR` to this path, keeping it separate from `~/.claude` where the CLI binary lives)
