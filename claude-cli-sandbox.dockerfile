@@ -36,6 +36,10 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | b
   && nvm alias default ${NODE_VERSION} \
   && nvm cache clear
 ENV PATH=${NVM_DIR}/versions/node/v${NODE_VERSION}/bin:${PATH}
+RUN echo '\n# nvm' >> ${HOME}/.bashrc \
+  && echo 'export NVM_DIR="${HOME}/.nvm"' >> ${HOME}/.bashrc \
+  && echo '[ -s "${NVM_DIR}/nvm.sh" ] && . "${NVM_DIR}/nvm.sh"' >> ${HOME}/.bashrc \
+  && echo '[ -s "${NVM_DIR}/bash_completion" ] && . "${NVM_DIR}/bash_completion"' >> ${HOME}/.bashrc
 
 # Install pyenv and Python
 ENV PYENV_ROOT=${HOME}/.pyenv
@@ -44,6 +48,10 @@ RUN curl -o- https://pyenv.run | bash \
   && ${PYENV_ROOT}/bin/pyenv global ${PYTHON_VERSION} \
   && ${PYENV_ROOT}/bin/pyenv versions --bare --skip-aliases | grep -v "^${PYTHON_VERSION}$" | xargs -r ${PYENV_ROOT}/bin/pyenv uninstall -f
 ENV PATH=${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}
+RUN echo '\n# pyenv' >> ${HOME}/.bashrc \
+  && echo 'export PYENV_ROOT="${HOME}/.pyenv"' >> ${HOME}/.bashrc \
+  && echo 'command -v pyenv >/dev/null || export PATH="${PYENV_ROOT}/bin:${PATH}"' >> ${HOME}/.bashrc \
+  && echo 'eval "$(pyenv init -)"' >> ${HOME}/.bashrc
 
 # Install Go
 ENV GOROOT=${HOME}/.go
