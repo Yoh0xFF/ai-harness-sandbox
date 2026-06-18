@@ -63,3 +63,7 @@ ENV PATH=${GOROOT}/bin:${GOPATH}/bin:${PATH}
 # Install Claude Code CLI (native, no Node dependency)
 RUN curl -fsSL https://cli.claude.ai/install.sh | sh
 ENV PATH=${HOME}/.claude/bin:${PATH}
+
+# Mount points for host volumes
+VOLUME ${HOME}/code
+VOLUME ${HOME}/.claude
