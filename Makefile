@@ -1,8 +1,8 @@
 IMAGE_NAME      := claude-cli-sandbox
 CONTAINER_NAME  := claude-cli-sandbox
 TIMESTAMP       := $(shell date +%Y%m%d-%H%M%S)
-CODE_DIR				:= ~/Workplace
-CONFIG_DIR			:= ~/.claude-config-sandbox
+CODE_DIR        := ~/Workplace
+CONFIG_DIR      := ~/.claude-config-sandbox
 
 .PHONY: build create clean
 
