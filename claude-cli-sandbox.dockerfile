@@ -44,3 +44,10 @@ RUN curl -o- https://pyenv.run | bash \
   && ${PYENV_ROOT}/bin/pyenv global ${PYTHON_VERSION} \
   && ${PYENV_ROOT}/bin/pyenv versions --bare --skip-aliases | grep -v "^${PYTHON_VERSION}$" | xargs -r ${PYENV_ROOT}/bin/pyenv uninstall -f
 ENV PATH=${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}
+
+# Install Go
+ENV GOROOT=${HOME}/.go
+ENV GOPATH=${HOME}/go
+RUN curl -fsSL https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz | tar -xz -C ${HOME} \
+  && mv ${HOME}/go ${GOROOT}
+ENV PATH=${GOROOT}/bin:${GOPATH}/bin:${PATH}
