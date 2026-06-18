@@ -59,3 +59,7 @@ ENV GOPATH=${HOME}/go
 RUN curl -fsSL https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz | tar -xz -C ${HOME} \
   && mv ${HOME}/go ${GOROOT}
 ENV PATH=${GOROOT}/bin:${GOPATH}/bin:${PATH}
+
+# Install Claude Code CLI (native, no Node dependency)
+RUN curl -fsSL https://cli.claude.ai/install.sh | sh
+ENV PATH=${HOME}/.claude/bin:${PATH}
