@@ -20,3 +20,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN groupadd -g ${GID} ${USER} \
   && useradd -m -u ${UID} -g ${GID} -s /bin/bash ${USER} \
   && echo "${USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# Switch to non-root user
+USER ${USER}
+ENV HOME=/home/${USER}
+WORKDIR ${HOME}
+
+# Install nvm and Node.js
+ENV NVM_DIR=${HOME}/.nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash \
+  && . ${NVM_DIR}/nvm.sh \
+  && nvm install ${NODE_VERSION} \
+  && nvm alias default ${NODE_VERSION} \
+  && nvm cache clear
+ENV PATH=${NVM_DIR}/versions/node/v${NODE_VERSION}/bin:${PATH}
